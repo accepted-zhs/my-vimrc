@@ -22,6 +22,7 @@ set expandtab
 
 set nu
 set cursorline
+set statusline=2
 set virtualedit=block,onemore
 set nowrap
 set hlsearch
@@ -39,7 +40,7 @@ set ttimeoutlen=0
 set mouse=a
 let mapleader='\'
 
-nnoremap <leader><leader>y "+y<CR>
+vnoremap <leader><leader>y "+y<CR>
 nnoremap <leader><leader>p "+p<CR>
 nnoremap <leader>c :e $MYVIMRC<CR>
 " nnoremap <leader>cc 
