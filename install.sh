@@ -36,6 +36,11 @@ function backup_file(){
     fi
 }
 
+function install_font(){
+    mkdir -p ~/.local/share/fonts/firacode
+    cp $(pwd)/fonts/*.otf ~/.local/share/fonts/firacode
+}
+
 function install_myvimrc(){
     echo Installing... 
     rm -i ~/.vimrc
