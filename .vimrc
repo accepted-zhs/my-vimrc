@@ -52,7 +52,7 @@ nnoremap <leader>c :e $MYVIMRC<CR>
 """ vim-plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontents.com/junegunn/vim-plug/master/plug.vim'
+    silent execute '!wget -P '.data_dir.'/autoload/plug.vim https://raw.githubusercontents.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -121,7 +121,7 @@ endfunc
 
 func! RunFile()
     let opts = {"cwd": $VIM_FILEPATH, "mode": "term", "rows": 8, "focus": 0}
-    if &filetype == "cpp" || &filetype == "c"
+    if &filetype == 'cpp' || &filetype == 'c'
         call asyncrun#run("!", opts, "time $VIM_PATHNOEXT")
     elseif &filetype == 'python'
         call asyncrun#run("!", opts, "python3 -u $VIM_FILEPATH")

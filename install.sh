@@ -46,6 +46,7 @@ function install_myvimrc(){
     rm -i ~/.vimrc
     rm -rf ~/.vim
     ln -s $(pwd)/.vimrc ~/.vimrc
+    mkdir -p ~/.vim/autoload
     sleep 0.5
 
     echo
