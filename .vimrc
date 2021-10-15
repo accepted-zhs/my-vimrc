@@ -61,7 +61,7 @@ nnoremap <leader>s :source $MYVIMRC<CR>
 """ vim-plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!wget -P '.data_dir.'/autoload/ https://raw.githubusercontents.com/junegunn/vim-plug/master/plug.vim'
+    silent execute '!wget -P '.data_dir.'/autoload/ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -99,6 +99,10 @@ call plug#begin('~/.vim/plugged')
     " Plug 'mattn/vim-lsp-settings'
     " Plug 'dense-analysis/ale'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    if filereadable(expand("~/.vimrc_custom_plugins"))
+        source ~/.vimrc_custom_plugins
+    endif
 call plug#end()
 
 """ colorscheme

@@ -55,6 +55,12 @@ function copy_files(){
     echo Copying files...
     ln -s $(pwd)/.vimrc ~/.vimrc
     mkdir -p ~/.vim/autoload
+    if ! [ -e ~/.vimrc_custom_settings ];then
+        touch ~/.vimrc_custom_settings
+    fi
+    if ! [ -e ~/.vimrc_custom_plugins ];then
+        touch ~/.vimrc_custom_plugins
+    fi
     sleep 0.5
 }
 
