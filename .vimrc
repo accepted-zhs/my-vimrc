@@ -54,7 +54,7 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=T
 
-set guifont=FiraCode\ Nerd\ Font\ Mono\ Retina\ 11
+set guifont=FiraCode\ Nerd\ Font\ Mono\ Regular\ 11
 
 vnoremap <leader><leader>y "+y<CR>
 nnoremap <leader><leader>p "+p<CR>
