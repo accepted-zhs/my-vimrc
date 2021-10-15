@@ -47,6 +47,15 @@ set ttimeoutlen=0
 set mouse=a
 let mapleader='\'
 
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+set guioptions-=m
+set guioptions-=T
+
+set guifont=FiraCode\ Nerd\ Font\ Mono\ Retina\ 11
+
 vnoremap <leader><leader>y "+y<CR>
 nnoremap <leader><leader>p "+p<CR>
 nnoremap <leader>c :e $MYVIMRC<CR>
