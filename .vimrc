@@ -50,9 +50,9 @@ let mapleader='\'
 vnoremap <leader><leader>y "+y<CR>
 nnoremap <leader><leader>p "+p<CR>
 nnoremap <leader>c :e $MYVIMRC<CR>
+nnoremap <leader>cc :e ~/.vimrc_custom_settings<CR>
+nnoremap <leader>cp :e ~/.vimrc_custom_plugins<CR>
 nnoremap <leader>s :source $MYVIMRC<CR>
-" nnoremap <leader>cc 
-" nnoremap <leader>cp
 
 """""""""""""""""""""""""""""
 " 插件们
