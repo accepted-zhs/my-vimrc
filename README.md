@@ -7,6 +7,6 @@ Include some plugins, colorschemes.
 You need to install `clangd` (needed by [coc-clangd]("https://github.com/clangd/coc-clangd")) and `npm` (needed by [coc.nvim]("https://github.com/neoclide/coc.nvim")).
 
 On Ubuntu:
-```sh
-sudo apt install clang clang-tidy clangd node npm
+```bash
+sudo apt install clang clang-tidy clangd nodejs npm
 ```
