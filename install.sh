@@ -34,12 +34,21 @@ function backup_file(){
             cp -r ~/.vim ~/.vim_bak_$cur
         fi
     fi
+
+    if [ -e ~/.config/nvim/init.vim ];then
+        echo -n "~/.config/nvim/init.vim found. Backup? [Y/n] "
+        read choice
+        if [ "$choice" != "n" ] && [ "$choice" != "N" ];then
+            cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim_$cur
+        fi
+    fi
 }
 
 function install_font(){
     echo Installing FiraCode Nerd Font...
     mkdir -p ~/.local/share/fonts/firacode
     cp $(pwd)/fonts/*.otf ~/.local/share/fonts/firacode
+    fc-cache -f -v ~/.local/share/fonts/firacode
     echo Please change your terminal font to FiraCode Nerd Font.
     sleep 0.5
 }
@@ -48,13 +57,42 @@ function remove_old_configuration(){
     echo Removing old configuration...
     rm -i ~/.vimrc
     rm -rf ~/.vim
+    rm -i ~/.config/nvim/init.vim
     sleep 0.5
 }
 
-function copy_files(){
-    echo Copying files...
+function copy_files_for_vim(){
+    which vim > /dev/null
+    if [ $? -ne 0 ];then
+        echo vim not found. Skipping.
+        return
+    fi
+    echo Copying files for vim...
     ln -s $(pwd)/.vimrc ~/.vimrc
-    mkdir -p ~/.vim/autoload
+    mkdir ~/.vim
+    cp -r $(pwd)/autoload ~/.vim/
+    
+    if ! [ -e ~/.vimrc_custom_settings ];then
+        touch ~/.vimrc_custom_settings
+    fi
+    if ! [ -e ~/.vimrc_custom_plugins ];then
+        touch ~/.vimrc_custom_plugins
+    fi
+    sleep 0.5
+}
+
+function copy_files_for_nvim(){
+    which nvim > /dev/null
+    if [ $? -ne 0 ];then
+        echo nvim not found. Skipping.
+        return
+    fi
+    echo Copying files for nvim...
+    mkdir -p ~/.config/nvim
+    ln -s $(pwd)/.vimrc ~/.config/nvim/init.vim
+    mkdir ~/.vim
+    cp -r $(pwd)/autoload ~/.vim/
+    
     if ! [ -e ~/.vimrc_custom_settings ];then
         touch ~/.vimrc_custom_settings
     fi
@@ -75,7 +113,8 @@ function install_myvimrc(){
     backup_file
     install_font
     remove_old_configuration
-    copy_files
+    copy_files_for_vim
+    copy_files_for_nvim
     finally_print_info
 }
 
