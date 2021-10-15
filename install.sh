@@ -1,12 +1,12 @@
 #!/bin/bash
 
 function get_time(){
-    echo `date "+%Y-%m-%d%H%M%S"`
+    echo `date "+%Y-%m-%d-%H%M%S"`
 }
 
 function print_info(){
     local choice
-    echo "This is an alpha version and many features are currently unavailable. (like custom configuration)"
+    echo "This is an alpha version and many features are currently unavailable. (like custom plugins)"
     echo -n "Continue? [y/N] "
     read choice
     if [ "$choice" != "y" ] && [ "$choice" != "Y" ];then
@@ -16,7 +16,7 @@ function print_info(){
 }
 
 function backup_file(){
-    local cur="`get_time`"
+    local cur=`get_time`
     local choice
     echo "It's going to backup your own vim configuration."
     if [ -e ~/.vimrc ];then
@@ -42,9 +42,10 @@ function install_font(){
 }
 
 function install_myvimrc(){
-    echo Installing... 
+    echo Removing old configuration...
     rm -i ~/.vimrc
     rm -rf ~/.vim
+    echo Copying files...
     ln -s $(pwd)/.vimrc ~/.vimrc
     mkdir -p ~/.vim/autoload
     sleep 0.5
@@ -56,4 +57,5 @@ function install_myvimrc(){
 
 print_info
 backup_file
+install_font
 install_myvimrc
