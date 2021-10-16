@@ -26,6 +26,7 @@ set foldmethod=marker
 set nu
 set cursorline
 set statusline=2
+set noshowmode
 set virtualedit=block,onemore
 set nowrap
 set hlsearch
@@ -36,6 +37,7 @@ set splitright
 set splitbelow
 set hidden
 set cmdheight=2
+set switchbuf=useopen,usetab,newtab
 
 set noswapfile
 set nobackup
@@ -115,16 +117,19 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 """ colorscheme
-colorscheme violet
+colorscheme base16-onedark
 set background=dark
-" let g:airline_theme="onedark"
+let g:airline_theme="onedark"
 hi Normal ctermfg=252 ctermbg=None
 
 """ vim-airline
 let g:airline#extensions#tabline#enabled = 1
-nnoremap <leader>p :bp<CR>
-nnoremap <leader>n :bn<CR>
-nnoremap <leader>d :bd<CR>
+let g:airline#extensions#tabline#tab_nr_type = 2
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#formatter = 'default'
+nnoremap <silent> <TAB>n :bn<CR>
+nnoremap <silent> <TAB>p :bp<CR>
+nnoremap <silent> <TAB>d :bd<CR>
 
 """ LeaderF
 " don't show the help in normal mode
@@ -331,7 +336,7 @@ endfunc
 
 func! RunFile()
     call asyncrun#stop("")
-    let opts = {"cwd": $VIM_FILEPATH, "mode": "term", "rows": 6, "focus": 0}
+    let opts = {"cwd": $VIM_FILEPATH, "mode": "term", "rows": 6}
     if &filetype == 'cpp' || &filetype == 'c'
         call asyncrun#run("!", opts, "time $VIM_PATHNOEXT")
     elseif &filetype == 'python'
