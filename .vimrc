@@ -124,9 +124,7 @@ hi Normal ctermfg=252 ctermbg=None
 
 """ vim-airline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 2
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 nnoremap <silent> <TAB>n :bn<CR>
 nnoremap <silent> <TAB>p :bp<CR>
 nnoremap <silent> <TAB>d :bd<CR>
@@ -168,11 +166,11 @@ noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 
 """ coc.nvim
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-highlight', 'coc-clangd', 'coc-sh', 'coc-pyright', 'coc-json']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-highlight', 'coc-sh', 'coc-pyright', 'coc-json', 'coc-clangd']
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=500
+set updatetime=150
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
