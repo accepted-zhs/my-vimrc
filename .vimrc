@@ -33,8 +33,6 @@ set hlsearch
 set incsearch
 set wildmenu
 set noeb
-set splitright              
-set splitbelow
 set hidden
 set cmdheight=2
 set switchbuf=useopen,usetab,newtab
