@@ -89,14 +89,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-airline/vim-airline'
     Plug 'Yggdroot/indentLine'
-    " Plug 'Raimondi/delimitMate'
+    " Plug 'jiangmiao/auto-pairs'
+    Plug 'Raimondi/delimitMate'
     Plug 'mhinz/vim-startify'
     Plug 'ryanoasis/vim-devicons'
     
     Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     Plug 'simnalamburt/vim-mundo'
     Plug 'skywind3000/asyncrun.vim'
-    Plug 'jiangmiao/auto-pairs'
     Plug 'preservim/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -322,23 +322,23 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " let g:asyncrun_open = 6
 
 func! CompileFile()
-    let opts = {"cwd": $VIM_FILEPATH, "mode": "term", "rows": 6, "focus": 0}
+    let opts = {"cwd": $VIM_FILEPATH, "mode": "term", "rows": 8, "focus": 0}
     if &filetype == 'cpp'
-        call asyncrun#run("!", opts, "g++ $VIM_FILEPATH -o $VIM_PATHNOEXT -Wall -Wextra -std=c++14 -g -DLOCAL")
+        call asyncrun#run("!", opts, "g++ \"$VIM_FILEPATH\" -o \"$VIM_PATHNOEXT\" -Wall -Wextra -std=c++14 -g -DLOCAL")
     elseif &filetype == 'c'
-        call asyncrun#run("!", opts, "gcc $VIM_FILEPATH -o $VIM_PATHNOEXT -Wall -Wextra")
+        call asyncrun#run("!", opts, "gcc \"$VIM_FILEPATH\" -o \"$VIM_PATHNOEXT\" -Wall -Wextra")
     endif
 endfunc
 
 func! RunFile()
     call asyncrun#stop("")
-    let opts = {"cwd": $VIM_FILEPATH, "mode": "term", "rows": 6}
+    let opts = {"cwd": $VIM_FILEPATH, "mode": "term", "rows": 8}
     if &filetype == 'cpp' || &filetype == 'c'
-        call asyncrun#run("!", opts, "time $VIM_PATHNOEXT")
+        call asyncrun#run("!", opts, "time \"$VIM_PATHNOEXT\"")
     elseif &filetype == 'python'
-        call asyncrun#run("!", opts, "python3 -u $VIM_FILEPATH")
+        call asyncrun#run("!", opts, "python3 -u \"$VIM_FILEPATH\"")
     elseif &filetype == 'sh'
-        call asyncrun#run("!", opts, "bash $VIM_FILEPATH")
+        call asyncrun#run("!", opts, "bash \"$VIM_FILEPATH\"")
     endif
 endfunc
 
