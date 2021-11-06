@@ -38,7 +38,7 @@ set cmdheight=2
 set switchbuf=useopen,usetab,newtab
 
 set noswapfile
-set nobackup
+set backup
 set autowrite
 set confirm
 set autochdir
@@ -82,7 +82,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin('~/.vim/plugged')
     Plug 'joshdick/onedark.vim'
     Plug 'tomasr/molokai'
-    Plug 'ashfinal/vim-colors-violet'
     Plug 'lifepillar/vim-solarized8'
     Plug 'chriskempson/base16-vim'
 
@@ -108,6 +107,7 @@ call plug#begin('~/.vim/plugged')
     " Plug 'mattn/vim-lsp-settings'
     " Plug 'dense-analysis/ale'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
     if filereadable(expand("~/.vimrc_custom_plugins"))
         source ~/.vimrc_custom_plugins
@@ -164,7 +164,7 @@ noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 
 """ coc.nvim
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-highlight', 'coc-sh', 'coc-pyright', 'coc-json', 'coc-clangd']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-sh', 'coc-pyright', 'coc-clangd']
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
