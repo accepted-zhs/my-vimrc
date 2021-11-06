@@ -88,10 +88,9 @@ function copy_files_for_nvim(){
         return
     fi
     echo Copying files for nvim...
+    
     mkdir -p ~/.config/nvim
-    ln -s $(pwd)/.vimrc ~/.config/nvim/init.vim
-    mkdir ~/.vim
-    cp -r $(pwd)/autoload ~/.vim/
+    ln -s $(pwd)/init.vim ~/.config/nvim/
     
     if ! [ -e ~/.vimrc_custom_settings ];then
         touch ~/.vimrc_custom_settings
