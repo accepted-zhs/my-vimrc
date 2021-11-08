@@ -62,6 +62,7 @@ nnoremap <leader>c :e $MYVIMRC<CR>
 nnoremap <leader>cc :e ~/.vimrc_custom_settings<CR>
 nnoremap <leader>cp :e ~/.vimrc_custom_plugins<CR>
 nnoremap <leader>s :source $MYVIMRC<CR>
+nnoremap <C-a> G$vgg0
 
 """""""""""""""""""""""""""""
 " 插件们
