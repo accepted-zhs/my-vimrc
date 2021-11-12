@@ -2,10 +2,12 @@
 
 Include some plugins, colorschemes.
 
-You need to install `clangd` (needed by [coc-clangd]("https://github.com/clangd/coc-clangd")) and `nodejs` (needed by [coc.nvim]("https://github.com/neoclide/coc.nvim")).
+You need to install `clangd` (needed by [clangd/coc-clangd]("https://github.com/clangd/coc-clangd")) and `nodejs >= 12.20` (needed by [neoclide/coc.nvim]("https://github.com/neoclide/coc.nvim")).
 
-`install_node.sh` in the repository can install `nodejs` easily.
+## Install nodejs
+
+`nodejs` in official package repository of some Linux distributions may be very old. And `install_node.sh` in the repository can install `nodejs` on Ubuntu/Debian easily.
 ```bash
-sudo ./install_node.sh
+bash ./install_node.sh
 ```
 
