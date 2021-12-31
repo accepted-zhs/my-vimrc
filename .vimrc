@@ -58,7 +58,7 @@ set guifont=FiraCode\ Nerd\ Font\ Mono\ Regular\ 11
 
 vnoremap <leader><leader>y "+y<CR>
 nnoremap <leader><leader>p "+p<CR>
-nnoremap <leader>c :e $MYVIMRC<CR>
+nnoremap <leader>c :e ~/.vimrc<CR>
 nnoremap <leader>cc :e ~/.vimrc_custom_settings<CR>
 nnoremap <leader>cp :e ~/.vimrc_custom_plugins<CR>
 nnoremap <leader>s :source $MYVIMRC<CR>
@@ -81,7 +81,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 """ plugins
 call plug#begin('~/.vim/plugged')
-    Plug 'joshdick/onedark.vim'
     Plug 'tomasr/molokai'
     Plug 'lifepillar/vim-solarized8'
     Plug 'chriskempson/base16-vim'
@@ -94,9 +93,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'mhinz/vim-startify'
     Plug 'ryanoasis/vim-devicons'
     
-    Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     Plug 'simnalamburt/vim-mundo'
     Plug 'skywind3000/asyncrun.vim'
+    Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     Plug 'preservim/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -109,6 +108,7 @@ call plug#begin('~/.vim/plugged')
     " Plug 'dense-analysis/ale'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'lervag/vimtex'
 
     if filereadable(expand("~/.vimrc_custom_plugins"))
         source ~/.vimrc_custom_plugins
@@ -128,7 +128,10 @@ nnoremap <silent> <TAB>n :bn<CR>
 nnoremap <silent> <TAB>p :bp<CR>
 nnoremap <silent> <TAB>d :bd<CR>
 
-""" LeaderF
+""" NERDTree
+nnoremap <leader>t :NERDTreeToggle<CR>
+
+""" Leaderf
 " don't show the help in normal mode
 let g:Lf_HideHelp = 1
 let g:Lf_UseCache = 0
@@ -161,11 +164,8 @@ noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 
-""" NERDTree
-nnoremap <leader>t :NERDTreeToggle<CR>
-
 """ coc.nvim
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-sh', 'coc-pyright', 'coc-clangd']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-sh', 'coc-pyright', 'coc-clangd', 'coc-highlight', 'coc-vimtex']
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -220,18 +220,18 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    elseif (coc#rpc#ready())
-        call CocActionAsync('doHover')
+    if index(['vim', 'help'], &filetype) >= 0
+        execute 'help ' . expand('<cword>')
+    elseif &filetype ==# 'tex'
+        VimtexDocPackage
     else
-        execute '!' . &keywordprg . " " . expand('<cword>')
+        call CocAction('doHover')
     endif
 endfunction
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <sid>show_documentation()<cr>
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -318,6 +318,37 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+""" vimtex
+set conceallevel=1
+let g:tex_conceal= 'abdmg'
+
+let g:tex_flavor= 'latex'
+let g:vimtex_compiler_latexmk_engines = {'_':'-xelatex'}
+
+let g:vimtex_view_general_viewer = 'zathura'
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_compiler_progname = 'nvr'
+
+" VimTeX uses latexmk as the default compiler backend. If you use it, which is
+" strongly recommended, you probably don't need to configure anything. If you
+" want another compiler backend, you can change it as follows. The list of
+" supported backends and further explanation is provided in the documentation,
+" see ":help vimtex-compiler".
+let g:vimtex_compiler_method = 'latexmk'
+
+let g:vimtex_toc_config = {
+\ 'name' : 'TOC',
+\ 'layers' : ['content', 'todo', 'include'],
+\ 'split_width' : 25,
+\ 'todo_sorted' : 0,
+\ 'show_help' : 1,
+\ 'show_numbers' : 1,
+\}
+
+" Most VimTeX mappings rely on localleader and this can be changed with the
+" following line. The default is usually fine and is the symbol "\".
+let maplocalleader = ","
 
 """ Async Single File Compile & Run
 " let g:asyncrun_open = 6
