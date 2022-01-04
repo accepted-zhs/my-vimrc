@@ -81,13 +81,11 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 """ plugins
 call plug#begin('~/.vim/plugged')
-    Plug 'tomasr/molokai'
     Plug 'lifepillar/vim-solarized8'
     Plug 'chriskempson/base16-vim'
 
     Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-airline/vim-airline'
-    Plug 'Yggdroot/indentLine'
     " Plug 'jiangmiao/auto-pairs'
     Plug 'Raimondi/delimitMate'
     Plug 'mhinz/vim-startify'
@@ -107,7 +105,6 @@ call plug#begin('~/.vim/plugged')
     " Plug 'mattn/vim-lsp-settings'
     " Plug 'dense-analysis/ale'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'lervag/vimtex'
 
     if filereadable(expand("~/.vimrc_custom_plugins"))
@@ -166,6 +163,8 @@ noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 
 """ coc.nvim
 let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-vimlsp', 'coc-sh', 'coc-pyright', 'coc-clangd', 'coc-highlight', 'coc-vimtex']
+
+let g:coc_sources_disable_map = { '*': ['buffer', 'around'] }
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
