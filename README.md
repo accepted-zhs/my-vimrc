@@ -1,3 +1,5 @@
+DEPRECATED. use [my-nvimrc](https://github.com/accepted-zhs/my-nvimrc) instead.
+
 # my-vimrc
 
 Include some plugins, colorschemes.
